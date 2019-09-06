@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GenesisQ - {% block titulo %} {% endblock titulo %}</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</head>
+
+
+<body>
+    <style type="text/css">
+     header{
+        
+        
+    background: rgb(160, 207, 111) 100%;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(0deg,  rgb(250, 250, 250) 15%, rgb(160, 207, 111) 75%);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(0deg,  rgb(250, 250, 250) 15% , rgb(160, 207, 111) 75%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    </style>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light font-weight-bold" >
+            <a class="navbar-brand" href="{% url 'core:home' %}">
+                <img src="{% static 'logo_genesisq.png' %}" width="50" />
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            {% if user.is_authenticated %}
+              
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Gerenciar Placas
+                        </a>
+                        <div class="dropdown-menu m-auto" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href=" {% url 'placas:cadastrar-placa' %} ">Cadastrar Placa</a> 
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href=" {% url 'placas:cadastrar-modelo' %} ">Cadastrar Modelo</a>                          
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="{% url 'requisicao:requisicao1' %}">Requisição</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Testes
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {% for teste in lista_testes %}
+                                <a class="dropdown-item" href="{% url 'testes:testes1' teste.Caminho %}">{{ teste.Nome }}</a> 
+                                <div class="dropdown-divider"></div>
+                                {% endfor %}                            
+                            </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Indicadores
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for indicador in Menu_indicadores %}
+                            <a class="dropdown-item" href=" {% url 'indicadores:indicadores1' indicador.Caminho %} ">{{ indicador.Nome }}</a> 
+                            <div class="dropdown-divider"></div>
+                            {% endfor %}                            
+                        </div>
+                    </li>
+
+                </ul>
+                <li class=" dropdown-header navbar-expand-md">
+                    <a class=" nav-link dropdown-toggle font-weight-normal text-dark" href="#" id="navbarDropdown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <img src="{% static 'images/profile.png' %}" width="20" class="avatar" alt="foto do usuário" />
+                        Olá, {{ user }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right md " aria-labelledby="navbarDropdown">
+                        {% if user.tipo == 'A' %}
+                        <a class="dropdown-item" href="{% url 'restrito:home_administrador'  %}">Área do Administrador</a>
+                        <a class="dropdown-item" href="/admin">Administração do site</a>
+                        {% elif user.tipo == 'S' %}
+                        <a class="dropdown-item" href="{% url 'restrito:home_supervisor' %}">Área do Supervisor</a>
+                        {% elif user.tipo == 'T' %}
+                        <a class="dropdown-item" href="{% url 'restrito:home_tester' %}">Área do Tester</a>
+                        {% else %}
+                        <a class="dropdown-item" href="{% url 'restrito:home_requisitor' %}">Área do Requisitor</a>
+                        {% endif%}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'core:sair' %}">Sair</a>
+                    </div>
+                </li>  
+            </div>
+        {% else %}
+        <a  class="navbar-brand" href="{% url 'core:home' %}">GenesisQ</a>
+            <ul class="navbar-nav ml-auto">
+                <a role="button" href="{% url 'core:entrar' %}" class="btn btn btn-success">Entrar</a>
+            </ul>
+        {% endif %}
+        </nav>
+    </header>  
+    
+
+    
+    <main>
+        {% for mensagem in messages  %}
+            {% if mensagem %}
+                <div class="alert alert-primary" role="alert">                
+                    {{mensagem}}                
+            </div>
+            {% endif %}
+        {% endfor %}
+        
+        {% block conteudo %}
+ 
+        {% endblock conteudo %}
+ 
+    </main>
+
+    <footer>
+        <hr/>
+        <p class="text-center">Todos os direitos reservados HAUTZ - TECHNOLOGY 2019</p>
+    </footer>
+
+
+</body>
+</style>
+</html>

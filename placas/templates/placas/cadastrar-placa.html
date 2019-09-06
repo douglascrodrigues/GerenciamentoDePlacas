@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block titulo %} Cadastrar Placa {% endblock  %}
+
+
+
+{% block conteudo %}
+  
+<p class="mb-md-5"></p>
+
+  <div class="container  mb-xl-auto">
+      <div class="row">
+        <div class="col">
+          <h2 class="font-italic mb-lg-5 text-center">Cadastrar Placa</h2>
+          <div class="container bg-light col-lg-12 border border-secondary rounded">
+              
+              <form method="POST" class="post-form ">
+                  {% csrf_token %}            
+                  <div class="form-group col-md-8 mb-xl-5">
+                    {{ form.Numero_serie  | as_crispy_field:"bootstrap"}}
+                    {{ form.Revisao_lm | as_crispy_field:"bootstrap" }}
+                    {{ form.Lote_numero  | as_crispy_field:"bootstrap"}}
+                    {{ form.Modelo  | as_crispy_field:"bootstrap"}} 
+                  </div>            
+                  <button type="submit" class="save btn btn-outline-primary col-md-8 mb-3 ">Salvar</button>  
+                </form>         
+          </div>
+        </div>
+  
+        <div class="col">
+            <h2 class="font-italic mb-lg-5 text-center">Placas existentes</h2>
+          <div style="overflow: auto; height: 200px">
+              
+            <table>
+              <div class="container bg-light col-lg-12">
+                
+                {% for placa in list_placa %}
+                
+                  {{ placa }}
+                
+                <div class="dropdown-divider"></div>
+                {% endfor %}  
+              </div>
+            </table>
+          </div>
+        </div>
+    </div>   
+  </div>
+  
+{% endblock conteudo %}
+
+
+
