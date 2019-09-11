@@ -21,7 +21,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
+           
+        <style  type="text/css">
+            header{             
+           background: rgb(160, 207, 111) 100%;  /* fallback for old browsers */
+           background: -webkit-linear-gradient(0deg,  rgb(250, 250, 250) 15%, rgb(160, 207, 111) 75%);  /* Chrome 10-25, Safari 5.1-6 */
+           background: linear-gradient(0deg,  rgb(250, 250, 250) 15% , rgb(160, 207, 111) 75%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            }
+        </style>
 
     </head>
 
@@ -29,16 +36,9 @@
    <header>
 
 <body>
-        <style  type="text/css">
-            header{            
-               
-           background: rgb(160, 207, 111) 100%;  /* fallback for old browsers */
-           background: -webkit-linear-gradient(0deg,  rgb(250, 250, 250) 15%, rgb(160, 207, 111) 75%);  /* Chrome 10-25, Safari 5.1-6 */
-           background: linear-gradient(0deg,  rgb(250, 250, 250) 15% , rgb(160, 207, 111) 75%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            }
-        </style>
 
-        
+
+
         <nav class="navbar navbar-expand-sm navbar-light font-weight-bold" >
             <a class="navbar-brand" href="{% url 'core:home' %}">
                 <img src="{% static 'logo_genesisq.png' %}" width="50" />
@@ -128,6 +128,7 @@
             </ul>
         {% endif %}
         </nav>
+        
     </header>  
     
 
