@@ -30,6 +30,9 @@ class Cadastro_placas(models.Model):
 
     class Meta:
         db_table = 'CADASTRO_PLACAS'
+        constraints = [
+            models.UniqueConstraint(fields=['Numero_serie'], name="Constraint_placas")
+        ]
 
 
 
