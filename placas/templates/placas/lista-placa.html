@@ -20,7 +20,7 @@
             </p>
 
             <div style="overflow: auto; height: 300px">
-            <table class="table ">
+            <table class="table table-striped ">
               <thead class="bg-dark text-white">
               <tr class="text-center">
                 <th>ID</th>
@@ -43,22 +43,17 @@
                     <td>{{ placa.Lote_numero }} </td>
                   <td>
                     
-                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" 
+                    <a alt="Editar" href="" class="fas fa-edit" data-toggle="modal" 
                       data-target="#alteraplacaModal" 
                       data-whateverid="{{ placa.id }}"
                       data-whateverserie="{{ placa.Numero_serie }}"
                       data-whatevermodelo="{{ placa.Modelo }}"
                       data-whateverrevisao="{{ placa.Revisao_lm }}"
-                      data-whateverlote="{{ placa.Lote_numero }}">
-                      
-                      Editar
-                    </button>
-                      
+                      data-whateverlote="{{ placa.Lote_numero }}"> 
                     </a>
-                    <a href="{% url 'placas:excluir-placa' placa.id %}"
-                      class="btn btn-outline-danger">
-                        Excluir
-                    </a>
+                      
+                    <a alt="Excluir" class="fas fa-trash-alt" href="{% url 'placas:excluir-placa' placa.id %}"></a>                   
+                     
                   </td>
                 </tr>
               {% endfor %}

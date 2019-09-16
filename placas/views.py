@@ -18,7 +18,7 @@ def cadastrar_modelo(request):
             form.save()    
     return render(request, "placas/cadastrar-modelo.html", context)
 
-
+@login_required
 def lista_placa(request):
     list_placa = Cadastro_placas.objects.all()
     context = {
@@ -39,7 +39,7 @@ def cadastrar_placa(request):
 
 
 
-
+@login_required
 def excluir_placa(request, id):
     placa = get_object_or_404(Cadastro_placas, id=id)
     context = {

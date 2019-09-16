@@ -28,16 +28,22 @@
            background: -webkit-linear-gradient(0deg,  rgb(250, 250, 250) 15%, rgb(160, 207, 111) 75%);  /* Chrome 10-25, Safari 5.1-6 */
            background: linear-gradient(0deg,  rgb(250, 250, 250) 15% , rgb(160, 207, 111) 75%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             }
+
+            a { 
+                color: inherit; 
+            } 
+
         </style>
+
+    <!-- servidor icones -->
+    <script src="https://kit.fontawesome.com/73beefb8cc.js"></script>
 
     </head>
 
 
    <header>
 
-<body>
-
-
+    <body>
 
         <nav class="navbar navbar-expand-sm navbar-light font-weight-bold" >
             <a class="navbar-brand" href="{% url 'core:home' %}">
@@ -48,7 +54,10 @@
 
             {% if user.is_authenticated %}
               
-
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 
                 <ul class="navbar-nav mr-auto">
@@ -151,6 +160,6 @@
     </footer>
 
 
-</body>
-</style>
+    </body>
+
 </html>
