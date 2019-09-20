@@ -13,42 +13,37 @@
         <h2 class="font-italic mb-lg-5 text-center">Cadastrar Modelo</h2>
         <div class="container bg-light col-lg-12 border border-secondary rounded">
             
-            <form method="POST" class="post-form ">
-              {% csrf_token %}      
-              <div class="form-row">
-                <div class="form-group col-md-4 mb-3">
-                {{ form.Modelo  | as_crispy_field:"bootstrap"}} 
-                </div>
-                <div class="form-group col-md-4 mb-4">
-                  {{ form.Descricao  | as_crispy_field:"bootstrap"}} 
-                </div>
-              </div>      
-              <button type="submit" class="save btn btn-outline-primary col-md-8 mb-3 ">Salvar</button>  
-            </form>         
+       
         </div>
       </div>
 
-      <div class="col">
-          <h2 class="font-italic mb-lg-5 text-center">Modelos existentes</h2>
-        <div style="overflow: auto; height: 200px">
-            
-          <table>
-            <div class="container bg-light col-lg-12">
-              
-              {% for modelo in list_modelo %}
-              
-                {{ modelo }}
-              
-              <div class="dropdown-divider"></div>
-              {% endfor %}  
+      <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title">Cadastro de Modelo</h5>
+                <p class="card-text">
+                    Complete o formulário abaixo para cadastrar
+                    um novo <code>Modelo de Placa</code>.
+                </p>
+                <form method="POST" class="post-form ">
+                  {% csrf_token %}      
+                  <div class="form-row">
+                    <div class="form-group col-md-4 mb-3">
+                    {{ form.Modelo  | as_crispy_field:"bootstrap"}} 
+                    </div>
+                    <div class="form-group col-md-4 mb-4">
+                      {{ form.Descricao  | as_crispy_field:"bootstrap"}} 
+                    </div>
+                  </div>      
+                  <button type="submit" class="save btn btn-outline-primary col-md-8 mb-3 ">Salvar</button>  
+                </form>  
+                </div>
             </div>
-          </table>
+            </div>
         </div>
-      </div>
-  </div>   
-</div>
-
-
+        </div>
 
 
 {% endblock conteudo %}
