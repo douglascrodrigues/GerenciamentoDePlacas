@@ -24,6 +24,10 @@ class Cadastro_placas(models.Model):
         on_delete = models.PROTECT
     )
 
+    Observacao = models.TextField(
+        'Observação',
+        blank=True
+    )
    
     def __str__(self):
         return self.Numero_serie

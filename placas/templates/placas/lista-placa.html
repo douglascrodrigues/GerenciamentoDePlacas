@@ -15,10 +15,22 @@
           <h5 class="card-title">Lista de Placas</h5>
           
           {% if list_placa|length > 0 %}
-            <p class="card-text">
-              Aqui está a lista de <code>Placas</code> cadastradas.
-            </p>
-            
+          <hr />  
+          <div class="form-inline" >
+              <a href="{% url 'placas:cadastrar-placa' %}" class="btn btn-success mb-2">
+                  Cadastrar Placa
+              </a>
+              <form class="form-inline">
+                  <br/>
+                  <div class="form-group mx-sm-3 mb-2" >
+                    <input type="Pesquisa a placa." class="form-control" id="pesquisa" name="pesquisa" placeholder="Digite sua pesquisa">
+                  </div>
+        
+                  <button type="submit" class="btn btn-info mb-2">Pesquisar</button>
+              </form>
+          </div>  
+
+
             <div style="overflow: auto; height: 300px">
             <table class="table table-striped table-bordered table-hover" role="grid" aria-describedby="dynamic-table_info">
               <thead class="bg-dark text-white"  >
@@ -28,11 +40,11 @@
                 <th>Modelo</th>
                 <th>Revisão LM</th>
                 <th>Nº do Lote</th>
+                <th>Observação</th>
                 <th>Ação</th>
               </tr>
               </thead>
 
-              
               <tbody >
               {% for placa in list_placa %}
                 <tr class="text-center">
@@ -41,16 +53,10 @@
                     <td>{{ placa.Modelo }} </td> 
                     <td>{{ placa.Revisao_lm }} </td> 
                     <td>{{ placa.Lote_numero }} </td>
+                    <td>{{ placa.Observacao }}</td>
                   <td>
                     
-                    <a alt="Editar" href="" class="fas fa-edit" data-toggle="modal" 
-                      data-target="#alteraplacaModal" 
-                      data-whateverid="{{ placa.id }}"
-                      data-whateverserie="{{ placa.Numero_serie }}"
-                      data-whatevermodelo="{{ placa.Modelo }}"
-                      data-whateverrevisao="{{ placa.Revisao_lm }}"
-                      data-whateverlote="{{ placa.Lote_numero }}"> 
-                    </a>
+                    <a alt="Editar" href="{% url 'placas:atualiza-placa' placa.id %}" class="fas fa-edit" ></a>                    
                       
                     <a alt="Excluir" class="fas fa-trash-alt" href="{% url 'placas:excluir-placa' placa.id %}"></a>                   
                      
@@ -63,14 +69,11 @@
           </div>
         {% else %}
           <div class="text-center mt-5 mb-5 jumbotron">
-            <h5>Nenhuma <code>placa</code> cadastrada ainda.</h5>
+            <h5>Nenhuma <code>placa</code> cadastrada ainda </br>ou a pesquisa não retornou resultado.</h5>
           </div>
         {% endif %}
           <hr />
-          <div class="text-left">
-            <a href="{% url 'placas:cadastrar-placa' %}" class="btn btn-primary">
-              Cadastrar Placa
-            </a>
+
           </div>
         </div>
       </div>
@@ -78,80 +81,6 @@
   </div>
 </div>
 
-<div class="modal fade" id="alteraplacaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Alterar placa</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="col">
-              <div class="row">
-                  
-                <div class="form-group">
-                  <label for="recipient-id" class="col-form-label">ID:</label>
-                  <input type="text" class="form-control" id="recipient-id" disabled>
-                </div>
-                <div class="form-group">
-                    <label for="recipient-serie" class="col-form-label">Nº Série:</label>
-                    <input type="text" class="form-control" id="recipient-serie">
-                </div>
-                
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-              <div class="form-group">
-                  <label for="recipient-modelo" class="col-form-label">Modelo:</label>
-                  <input type="text" class="form-control" id="recipient-modelo">
-              </div>
-              <div class="form-group">
-                  <label for="recipient-revisaolm" class="col-form-label">Revisão LM:</label>
-                  <input type="text" class="form-control" id="recipient-revisao">
-              </div>
-              <div class="form-group">
-                  <label for="recipient-lote" class="col-form-label">Nº do Lote:</label>
-                  <input type="text" class="form-control" id="recipient-lote">
-              </div>
-            
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-                  <button type="button" class="btn btn-danger disabled">Salvar alterações</button>
-              </div>
-            </div>
-            </div>
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-
-
-<script type="text/javascript">
-  $('#alteraplacaModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var recipientid = button.data('whateverid') // Extract info from data-* attributes
-    var recipientserie = button.data('whateverserie') // Extract info from data-* attributes
-    var recipientmodelo = button.data('whatevermodelo') // Extract info from data-* attributes
-    var recipientrevisao = button.data('whateverrevisao') // Extract info from data-* attributes
-    var recipientlote = button.data('whateverlote') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this)
-    modal.find('.modal-title').text('Alterar placa ' + recipientmodelo)
-    modal.find('#recipient-id').val(recipientid)
-    modal.find('#recipient-serie').val(recipientserie)
-    modal.find('#recipient-modelo').val(recipientmodelo)
-    modal.find('#recipient-revisao').val(recipientrevisao)
-    modal.find('#recipient-lote').val(recipientlote)
-})
-</script>
 
 {% endblock conteudo %}
 

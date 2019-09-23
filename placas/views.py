@@ -19,12 +19,18 @@ def cadastrar_modelo(request):
     return render(request, "placas/cadastrar-modelo.html", context)
 
 @login_required
-def lista_placa(request):
-    list_placa = Cadastro_placas.objects.all()
+def lista_placa(request, id=None):
+    pesquisa = request.GET.get("pesquisa", None)
+    if pesquisa:
+        list_placa = Cadastro_placas.objects.all()
+        list_placa = list_placa.filter(Numero_serie__icontains=pesquisa) #Icontains é como se fosse um like%% do SQL
+    else:
+        list_placa = Cadastro_placas.objects.all()
     context = {
         'list_placa': list_placa
     }
     return render(request, "placas/lista-placa.html", context)
+
 
 @login_required
 def cadastrar_placa(request):
@@ -51,3 +57,13 @@ def excluir_placa(request, id):
     return render(request, "placas/excluir-placa.html", context)
 
 
+def atualiza_placa(request, id):
+    placas = get_object_or_404(Cadastro_placas, pk=id)
+    form = PlacaForm(request.POST or None, request.FILES or None, instance=placas)
+    context = {
+        "form": form
+    }
+    if form.is_valid():
+        form.save()
+        return redirect('placas:lista-placa') 
+    return render(request, "placas/cadastrar-placa.html", context)

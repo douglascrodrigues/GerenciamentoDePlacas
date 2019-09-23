@@ -23,14 +23,13 @@
         crossorigin="anonymous"></script>
            
         <style  type="text/css">
-            header{             
-           background: rgb(160, 207, 111) 100%;  /* fallback for old browsers */
-           background: -webkit-linear-gradient(0deg,  rgb(250, 250, 250) 15%, rgb(160, 207, 111) 75%);  /* Chrome 10-25, Safari 5.1-6 */
-           background: linear-gradient(0deg,  rgb(250, 250, 250) 15% , rgb(160, 207, 111) 75%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            header {             
+                background: rgb(70, 130, 180) 100%;  /* fallback for old browsers */
+                
             }
 
             a { 
-                color: inherit; 
+                color: inherit;  /* cor incolor para as tag do tipo a */
             } 
 
         </style>
@@ -45,7 +44,7 @@
 
     <body>
 
-        <nav class="navbar navbar-expand-sm navbar-light font-weight-bold" >
+        <nav class="navbar navbar-expand-sm navbar-light font-weight-bold text-white" >
             <a class="navbar-brand" href="{% url 'core:home' %}">
                 <img src="{% static 'logo_genesisq.png' %}" width="50" />
             </a>
