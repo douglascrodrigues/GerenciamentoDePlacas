@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from placas.models import Menu_placas, Modelo_placas, Cadastro_placas, Cadastro_lote
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .forms import ModeloForm, PlacaForm
+from .forms import ModeloForm, PlacaForm, LoteForm
 from django import forms
 
 
@@ -110,3 +110,33 @@ def atualiza_placa(request, id):
         form.save()
         return redirect('placas:lista-placa') 
     return render(request, "placas/cadastrar-placa.html", context)
+
+
+
+    ### VIEWS PLACA ####
+
+@login_required
+def lista_lote(request, id=None):
+    pesquisa = request.GET.get("pesquisa", None)
+    if pesquisa:
+        list_lote = Cadastro_lote.objects.all()
+        list_lote = list_lote.filter(Lote_numero__icontains=pesquisa) #Icontains é como se fosse um like%% do SQL
+    else:
+        list_lote = Cadastro_lote.objects.all()
+    context = {
+        'list_lote': list_lote
+    }
+    return render(request, "placas/lista-lote.html", context)
+
+
+@login_required
+def cadastrar_lote(request):
+    context = {
+        "form": LoteForm   
+    }
+    if request.method == "POST":
+        form = LoteForm(request.POST)
+        if form.is_valid():
+            form.save()      
+    return render(request, "placas/cadastrar-lote.html", context)
+

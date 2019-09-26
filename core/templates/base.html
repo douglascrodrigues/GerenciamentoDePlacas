@@ -61,11 +61,11 @@
                             Gerenciar Placas
                         </a>
                         <div class="dropdown-menu m-auto" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href=" {% url 'placas:lista-placa' %} ">Cadastrar Placa</a>
+                            <a class="dropdown-item" href=" {% url 'placas:lista-placa' %} ">Placas</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href=" {% url 'placas:lista-modelo' %} ">Cadastrar Modelo</a>
+                            <a class="dropdown-item" href=" {% url 'placas:lista-modelo' %} ">Modelos</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href=" ">Cadastrar Lote</a>
+                            <a class="dropdown-item" href=" {% url 'placas:cadastrar-lote' %}">Lotes</a>
                         </div>
                     </li>
 
