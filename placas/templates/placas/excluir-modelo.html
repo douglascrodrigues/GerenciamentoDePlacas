@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Exclusão de Modelo</h5>
+
+        <p class="card-text">
+          Você tem certeza que quer excluir o modelo:
+          
+          <b>{{ modelos.Modelo }} - {{ modelos.Descricao }}</b>?
+          
+          
+        </p>
+
+        <form method="post">
+          {% csrf_token %}
+
+          <hr />
+          <div class="text-right">
+            <a href="{% url 'placas:lista-modelo' %}" 
+              class="btn btn-outline-danger">
+                Cancelar
+            </a>
+            <button class="btn btn-danger" disabled>Excluir</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+{% endblock conteudo %}

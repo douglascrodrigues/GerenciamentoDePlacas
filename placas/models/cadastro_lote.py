@@ -6,6 +6,16 @@ class Cadastro_lote(models.Model):
         'Numero do lote',
         max_length=50
     )
+
+    Qtd_placa = models.IntegerField(
+        'Quantidade de placa',
+        default=1
+    )
+
+    Ativo = models.BooleanField(
+        'Lote Ativo',
+        default=True
+    )
     
     def __str__(self):
         return self.Lote_numero

@@ -9,70 +9,71 @@
 
 
 <div class="container">
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="card">
-        <div class="card-body">
-        <h5 class="card-title">Cadastro de Placa</h5>
-        <p class="card-text">
-            Complete o formulário abaixo para cadastrar
-            uma nova <code>Placa</code>.
-        </p>
-        <form method="POST" class="post-form ">
-            {% csrf_token %}    
-            <div class="form-row">
-                <div class="form-group col-md-8 mb-xl-1">
-                {{ form.Numero_serie  | as_crispy_field:"bootstrap"}}
-                {{ form.Revisao_lm | as_crispy_field:"bootstrap" }}
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Cadastro de Placa</h5>
+                    <p class="card-text">
+                        Complete o formulário abaixo para cadastrar
+                        uma nova <code>Placa</code>.
+                    </p>
+                    <form method="POST" class="post-form ">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col-md-8 mb-xl-1">
+                                {{ form.Numero_serie  | as_crispy_field:"bootstrap"}}
+                                {{ form.Revisao_lm | as_crispy_field:"bootstrap" }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-8 mb-xl-1">
+                                {{ form.Lote_numero  | as_crispy_field:"bootstrap"}}
+                            </div>
+                            <div class="form-group col-md-1 mb-xl-0 ">
+                                <a href="#"><img src="{% static 'placas/images/acrescer-png.png' %}" alt="+ lote"
+                                        width=15 height=15 data-toggle="modal" data-target="#loteModal"></a>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-8 mb-xl-4">
+                                {{ form.Modelo | as_crispy_field:"bootstrap"}}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-8 mb-xl-4">
+                                {{ form.Observacao | as_crispy_field:"bootstrap"}}
+                            </div>
+                        </div>
+                        <button type="submit" class="save btn btn-outline-primary col-md-8 mb-3  ">Salvar</button>
+                    </form>
                 </div>
-            </div> 
-            <div class="form-row">  
-                <div class="form-group col-md-8 mb-xl-1">
-                    {{ form.Lote_numero  | as_crispy_field:"bootstrap"}}                          
-                </div>
-                <div class="form-group col-md-1 mb-xl-0 ">
-                    <a href="#" ><img src="{% static 'placas/images/acrescer-png.png' %}" alt="+ lote" width=15 height=15 data-toggle="modal" data-target="#loteModal"></a>                     
-                </div>                    
             </div>
-            <div class="form-row">  
-                <div class="form-group col-md-8 mb-xl-4">
-                    {{ form.Modelo | as_crispy_field:"bootstrap"}}                          
-                </div>                   
-            </div>      
-            <div class="form-row">  
-                <div class="form-group col-md-8 mb-xl-4">
-                    {{ form.Observacao | as_crispy_field:"bootstrap"}}                          
-                </div>                   
-            </div>   
-            <button type="submit" class="save btn btn-outline-primary col-md-8 mb-3  ">Salvar</button>  
-            </form> 
         </div>
     </div>
-    </div>
-</div>
 </div>
 
-<!-- modal no campo Lote --> 
-  <div id="loteModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-    
+<!-- modal no campo Lote -->
+<div id="loteModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
         <!-- Modal content-->
         <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Adicionar lote</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            
-          </div>
-          <div class="modal-body">
-            A desenvolver...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          </div>
+            <div class="modal-header">
+                <h4 class="modal-title">Adicionar lote</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                A desenvolver...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
         </div>
-    
-      </div>
+
     </div>
+</div>
 
 
 {% endblock conteudo %}
