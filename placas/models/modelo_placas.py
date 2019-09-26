@@ -12,6 +12,12 @@ class Modelo_placas(models.Model):
         'Descrição',
         max_length=200
     )
+
+    Ativo = models.BooleanField(
+        'Modelo Ativo',
+        default=True
+    )
+
     
 
     def __str__(self):
