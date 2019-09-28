@@ -129,10 +129,27 @@ def lista_lote(request, id=None):
     return render(request, "placas/lista-lote.html", context)
 
 
+    ############# VIEWS LOTE #############
+
+@login_required
+def lista_lote(request, id=None):
+    pesquisa = request.GET.get("pesquisa", None)
+    if pesquisa:
+        list_lote = Cadastro_lote.objects.all()
+        list_lote = list_lote.filter(Lote_numero__icontains=pesquisa) #Icontains é como se fosse um like%% do SQL
+    else:
+        list_lote = Cadastro_lote.objects.all()
+    context = {
+        'list_lote': list_lote
+    }
+    return render(request, "placas/lista-lote.html", context)
+
 @login_required
 def cadastrar_lote(request):
+    list_lote = Cadastro_lote.objects.all() 
     context = {
-        "form": LoteForm   
+        "form": LoteForm,
+        'list_lote': list_lote   
     }
     if request.method == "POST":
         form = LoteForm(request.POST)
@@ -140,3 +157,25 @@ def cadastrar_lote(request):
             form.save()      
     return render(request, "placas/cadastrar-lote.html", context)
 
+
+def excluir_lote(request, id):
+    lote = get_object_or_404(Cadastro_lote, id=id)
+    context = {
+        "lote": Cadastro_lote.objects.filter(id=id)[0]
+    }
+    if request.method == "POST":
+        lote.delete()
+        return redirect('placas:cadastrar-lote')
+    return render(request, "placas/excluir-lote.html", context)
+
+@login_required
+def atualiza_lote(request, id):
+    lote = get_object_or_404(Cadastro_lote, pk=id)
+    form = LoteForm(request.POST or None, request.FILES or None, instance=lote)
+    context = {
+        "form": form
+    }
+    if form.is_valid():
+        form.save()
+        return redirect('placas:lista-lote') 
+    return render(request, "placas/cadastrar-lote.html", context)

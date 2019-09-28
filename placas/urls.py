@@ -13,9 +13,14 @@ urlpatterns = [
     #Urls placa
     path('lista-placa/', views.lista_placa, name="lista-placa"),
     path('cadastrar-placa/', views.cadastrar_placa, name="cadastrar-placa"  ),
-    path('cadastrar-lote/', views.cadastrar_lote, name="cadastrar-lote"),
     path('excluir-placa/<int:id>', views.excluir_placa, name="excluir-placa" ),
-    path('atualiza-placa/<int:id>', views.atualiza_placa, name="atualiza-placa")
+    path('atualiza-placa/<int:id>', views.atualiza_placa, name="atualiza-placa"),
+
+    #Urls lote
+    path('lista-lote/', views.lista_lote, name="lista-lote"),
+    path('cadastrar-lote/', views.cadastrar_lote, name="cadastrar-lote"),
+    path('excluir-lote/<int:id>', views.excluir_lote, name="excluir-lote"),
+    path('atualiza-lote/<int:id>', views.atualiza_lote, name="atualiza-lote")
     
     
     ]

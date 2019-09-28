@@ -11,7 +11,8 @@ class Cadastro_placas(models.Model):
         'placas.modelo_placas', 
         related_name='modelo_placas_modelo',
         on_delete = models.PROTECT,
-        null = True
+        null = True,
+        limit_choices_to= {'Ativo': True} #Limita somente a modelos ativos
     )
 
     Revisao_lm = models.IntegerField(
@@ -21,7 +22,8 @@ class Cadastro_placas(models.Model):
     Lote_numero = models.ForeignKey(
         'placas.cadastro_lote',
         related_name='numero_lote',
-        on_delete = models.PROTECT
+        on_delete = models.PROTECT,
+        limit_choices_to= {'Ativo': True} #Limita somente a modelos ativos
     )
 
     Observacao = models.TextField(
@@ -29,6 +31,9 @@ class Cadastro_placas(models.Model):
         blank=True
     )
    
+
+ 
+    
     def __str__(self):
         return self.Numero_serie
 
