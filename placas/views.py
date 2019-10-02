@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from placas.models import Menu_placas, Modelo_placas, Cadastro_placas, Cadastro_lote
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import ModeloForm, PlacaForm, LoteForm
-from django import forms
+from django.db.models import Q
 
 
 ### VIEWS MODELO ####
@@ -12,13 +12,19 @@ def lista_modelo(request, id=None):
     pesquisa = request.GET.get("pesquisa", None)
     if pesquisa:
         list_modelo = Modelo_placas.objects.all()
-        list_modelo = list_modelo.filter(Modelo__icontains=pesquisa) #Icontains é como se fosse um like%% do SQL
+        list_modelo = list_modelo.filter(
+            Q(Modelo__icontains=pesquisa) |
+            Q(Descricao__icontains=pesquisa) |
+            Q(Ativo__icontains=pesquisa
+              )
+        )  # Icontains é como se fosse um like%% do SQL
     else:
         list_modelo = Modelo_placas.objects.all()
     context = {
         'list_modelo': list_modelo
     }
     return render(request, "placas/lista-modelo.html", context)
+
 
 @login_required
 def cadastrar_modelo(request):
@@ -30,8 +36,9 @@ def cadastrar_modelo(request):
     if request.method == "POST":
         form = ModeloForm(request.POST)
         if form.is_valid():
-            form.save()    
+            form.save()
     return render(request, "placas/cadastrar-modelo.html", context)
+
 
 @login_required
 def excluir_modelo(request, id):
@@ -44,19 +51,19 @@ def excluir_modelo(request, id):
         return redirect('placas:lista-modelo')
     return render(request, "placas/excluir-modelo.html", context)
 
+
 @login_required
 def atualiza_modelo(request, id):
     modelos = get_object_or_404(Modelo_placas, pk=id)
-    form = ModeloForm(request.POST or None, request.FILES or None, instance=modelos)
+    form = ModeloForm(request.POST or None,
+                      request.FILES or None, instance=modelos)
     context = {
         "form": form
     }
     if form.is_valid():
         form.save()
-        return redirect('placas:lista-modelo') 
+        return redirect('placas:lista-modelo')
     return render(request, "placas/cadastrar-modelo.html", context)
-
-
 
 
 ### VIEWS PLACA ####
@@ -66,7 +73,11 @@ def lista_placa(request, id=None):
     pesquisa = request.GET.get("pesquisa", None)
     if pesquisa:
         list_placa = Cadastro_placas.objects.all()
-        list_placa = list_placa.filter(Numero_serie__icontains=pesquisa) #Icontains é como se fosse um like%% do SQL
+        list_placa = list_placa.filter(
+            Q(Numero_serie__icontains=pesquisa) |
+            Q(Observacao__icontains=pesquisa) |
+            Q(Modelo__Modelo__icontains=pesquisa) 
+            )  # Icontains é como se fosse um like%% do SQL
     else:
         list_placa = Cadastro_placas.objects.all()
     context = {
@@ -78,14 +89,13 @@ def lista_placa(request, id=None):
 @login_required
 def cadastrar_placa(request):
     context = {
-        "form": PlacaForm       
+        "form": PlacaForm
     }
     if request.method == "POST":
         form = PlacaForm(request.POST)
         if form.is_valid():
-            form.save()      
+            form.save()
     return render(request, "placas/cadastrar-placa.html", context)
-
 
 
 @login_required
@@ -99,44 +109,47 @@ def excluir_placa(request, id):
         return redirect('placas:lista-placa')
     return render(request, "placas/excluir-placa.html", context)
 
+
 @login_required
 def atualiza_placa(request, id):
     placas = get_object_or_404(Cadastro_placas, pk=id)
-    form = PlacaForm(request.POST or None, request.FILES or None, instance=placas)
+    form = PlacaForm(request.POST or None,
+                     request.FILES or None, instance=placas)
     context = {
         "form": form
     }
     if form.is_valid():
         form.save()
-        return redirect('placas:lista-placa') 
+        return redirect('placas:lista-placa')
     return render(request, "placas/cadastrar-placa.html", context)
-
-
 
     ### VIEWS PLACA ####
 
+
 @login_required
 def lista_lote(request, id=None):
     pesquisa = request.GET.get("pesquisa", None)
     if pesquisa:
         list_lote = Cadastro_lote.objects.all()
-        list_lote = list_lote.filter(Lote_numero__icontains=pesquisa) #Icontains é como se fosse um like%% do SQL
+        # Icontains é como se fosse um like%% do SQL
+        list_lote = list_lote.filter(Lote_numero__icontains=pesquisa)
     else:
         list_lote = Cadastro_lote.objects.all()
     context = {
         'list_lote': list_lote
     }
     return render(request, "placas/lista-lote.html", context)
-
 
     ############# VIEWS LOTE #############
 
+
 @login_required
 def lista_lote(request, id=None):
     pesquisa = request.GET.get("pesquisa", None)
     if pesquisa:
         list_lote = Cadastro_lote.objects.all()
-        list_lote = list_lote.filter(Lote_numero__icontains=pesquisa) #Icontains é como se fosse um like%% do SQL
+        # Icontains é como se fosse um like%% do SQL
+        list_lote = list_lote.filter(Lote_numero__icontains=pesquisa)
     else:
         list_lote = Cadastro_lote.objects.all()
     context = {
@@ -144,17 +157,18 @@ def lista_lote(request, id=None):
     }
     return render(request, "placas/lista-lote.html", context)
 
+
 @login_required
 def cadastrar_lote(request):
-    list_lote = Cadastro_lote.objects.all() 
+    list_lote = Cadastro_lote.objects.all()
     context = {
         "form": LoteForm,
-        'list_lote': list_lote   
+        'list_lote': list_lote
     }
     if request.method == "POST":
         form = LoteForm(request.POST)
         if form.is_valid():
-            form.save()      
+            form.save()
     return render(request, "placas/cadastrar-lote.html", context)
 
 
@@ -168,6 +182,7 @@ def excluir_lote(request, id):
         return redirect('placas:cadastrar-lote')
     return render(request, "placas/excluir-lote.html", context)
 
+
 @login_required
 def atualiza_lote(request, id):
     lote = get_object_or_404(Cadastro_lote, pk=id)
@@ -177,5 +192,5 @@ def atualiza_lote(request, id):
     }
     if form.is_valid():
         form.save()
-        return redirect('placas:lista-lote') 
+        return redirect('placas:lista-lote')
     return render(request, "placas/cadastrar-lote.html", context)
