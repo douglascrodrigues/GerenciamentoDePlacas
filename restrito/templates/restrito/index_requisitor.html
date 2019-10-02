@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block titulo %} Área do Requisitor {% endblock titulo %}
 
 
@@ -7,11 +7,10 @@
 {% block conteudo %}
 
 <h2> Olá, {{ req.nome }} </h2>
-
-<p class="col-md-10 col-md-offset-2" > Suas funções </p>
-<p class="col-md-10">- Requisitar Placas</p>
-<p class="col-md-10">- Acompanhar Requisições</p>
-
+<div class="container-fluid">
+    <p class="col-md-10 col-md-offset-2"> Suas funções </p>
+    <p class="col-md-10">- Requisitar Placas</p>
+    <p class="col-md-10">- Acompanhar Requisições</p>
+</div>
 
 {% endblock conteudo %}
-

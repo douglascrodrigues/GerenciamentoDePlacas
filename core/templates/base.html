@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -27,20 +28,30 @@
 
 
     <style type="text/css">
-        header {
-            background: rgb(70, 130, 180) 100%;
-            /* fallback for old browsers */
-
-        }
-
         a {
             color: inherit;
             /* cor incolor para as tag do tipo a */
         }
-        
-        body {
-            background-image:url("{% static 'images/fundo5.jpg' %}")
 
+
+
+
+        body {
+            background-image: url("{% static 'images/fundo5.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top;
+            position: relative;
+            background-attachment: fixed;
+            overflow: auto;
+        }
+
+        .img-profile {
+            border: 0px solid;
+            position: absolute;
+            top: 100px;
+            left: opx;
+            right: 70px;
         }
     </style>
 
@@ -55,7 +66,7 @@
 <header>
 
     <body>
-        <nav class="navbar navbar-expand-sm navbar-light font-weight-bold bg-white">
+        <nav class="navbar navbar-expand-sm navbar-light font-weight-bold bg-transparent">
             <a class="navbar-brand" href="{% url 'core:home' %}">
                 <img src="{% static 'logo_genesisq.png' %}" width="50" />
             </a>
@@ -168,20 +179,25 @@
     </div>
     {% endif %}
     {% endfor %}
-</br>
+    </br></br></br></br>
 
     {% block conteudo %}
+
+    {% if "/restrito/" in request.path %}
+    <div class="img-profile">
+        <img src="{% url static '/restrito/images/profile-fundo.png' %}" alt="img" style="width: 600px;">
+    </div>
+    {% endif %}
+
 
     {% endblock conteudo %}
 
 </main>
 
+</body>
 <footer>
     <hr />
     <p class="text-center">Todos os direitos reservados HAUTZ - TECHNOLOGY 2019</p>
 </footer>
-
-
-</body>
 
 </html>
