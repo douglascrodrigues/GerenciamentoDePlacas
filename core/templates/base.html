@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -24,51 +23,27 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-
-
-
-    <style type="text/css">
-        a {
-            color: inherit;
-            /* cor incolor para as tag do tipo a */
-        }
-
-
-
-
-        body {
-            background-image: url("{% static 'images/fundo5.jpg' %}");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: top;
-            position: relative;
-            background-attachment: fixed;
-            overflow: auto;
-        }
-
-        .img-profile {
-            border: 0px solid;
-            position: absolute;
-            top: 100px;
-            left: opx;
-            right: 70px;
-        }
-    </style>
-
-
-
     <!-- servidor icones -->
     <script src="https://kit.fontawesome.com/73beefb8cc.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/personal.css' %}" />
+
+    <!-- imagem de background-->
+    <style>
+        body {
+            background-image: url("{% static 'images/fundo5.jpg' %}");
+        }
+    </style>
 
 </head>
 
 
 <header>
 
-    <body>
+    <body class="css-body">
         <nav class="navbar navbar-expand-sm navbar-light font-weight-bold bg-transparent">
             <a class="navbar-brand" href="{% url 'core:home' %}">
-                <img src="{% static 'logo_genesisq.png' %}" width="50" />
+                <img src="{% static 'logo_genesisq.png' %}" width="60" />
             </a>
             {% if user.is_authenticated %}
 
@@ -136,37 +111,40 @@
                     </li>
 
                 </ul>
-                <li class=" dropdown-header navbar-expand-md rounded bg-info">
-                    <a class=" nav-link dropdown-toggle font-weight-normal text-dark" href="#" id="navbarDropdown"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <i class="fas fa-user" alt="foto do usuário"></i>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius: 15px;">
+                        <i class="fas fa-user " alt="foto do usuário"></i>
                         Olá, {{ user }}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right md " aria-labelledby="navbarDropdown">
+                        </a></button>
+                    <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
                         {% if user.tipo == 'A' %}
-                        <a class="dropdown-item" href="{% url 'restrito:home_administrador'  %}">Área do
+                        <a class="dropdown-item" href="{% url 'restrito:home_administrador'  %}"><i
+                                class="fas fa-id-card"></i> Área do
                             Administrador</a>
-                        <a class="dropdown-item" href="/admin">Administração do site</a>
+                        <a class="dropdown-item" href="/admin"><i class="fas fa-cog"></i> Administração do site</a>
                         {% elif user.tipo == 'S' %}
-                        <a class="dropdown-item" href="{% url 'restrito:home_supervisor' %}">Área do Supervisor</a>
+                        <a class="dropdown-item" href="{% url 'restrito:home_supervisor' %}"><i
+                                class="fas fa-id-card"></i> Área do Supervisor</a>
                         {% elif user.tipo == 'T' %}
-                        <a class="dropdown-item" href="{% url 'restrito:home_tester' %}">Área do Tester</a>
+                        <a class="dropdown-item" href="{% url 'restrito:home_tester' %}"><i class="fas fa-id-card"></i>
+                            Área do Tester</a>
                         {% else %}
-                        <a class="dropdown-item" href="{% url 'restrito:home_requisitor' %}">Área do Requisitor</a>
+                        <a class="dropdown-item" href="{% url 'restrito:home_requisitor' %}"><i
+                                class="fas fa-id-card"></i> Área do Requisitor</a>
                         {% endif%}
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'core:sair' %}"><i class="fas fa-power-off"></i> Sair</a>
+                        <a class="dropdown-item" href="{% url 'core:sair' %}"><i class="fas fa-power-off"></i>
+                            Sair</a>
                     </div>
-                </li>
-            </div>
-            {% else %}
-            <a class="navbar-brand" href="{% url 'core:home' %}">GenesisQ</a>
-            <ul class="navbar-nav ml-auto">
-                <a role="button" href="{% url 'core:entrar' %}" class="btn btn btn-success">Entrar</a>
-            </ul>
-            {% endif %}
+                </div>
+                {% else %}
+                <a class="navbar-brand" href="{% url 'core:home' %}">GenesisQ</a>
+                <ul class="navbar-nav ml-auto">
+                    <a role="button" href="{% url 'core:entrar' %}" class="btn btn btn-success">Entrar</a>
+                </ul>
+                {% endif %}
         </nav>
-
 </header>
 
 
@@ -179,21 +157,24 @@
     </div>
     {% endif %}
     {% endfor %}
-    </br></br></br></br>
+    </br></br></br></br></br>
 
-    {% block conteudo %}
 
-    {% if "/restrito/" in request.path %}
-    <div class="img-profile">
-        <img src="{% url static '/restrito/images/profile-fundo.png' %}" alt="img" style="width: 600px;">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            {% block conteudo %}
+            {% endblock conteudo %}
+            {% if 'restrito' in request.path %}
+            
+
+                <img src="{% static 'restrito/images/profile-fundo.png' %}" alt="img" class="img-restrito">
+            
+            {% endif %}
+        </div>
     </div>
-    {% endif %}
-
-
-    {% endblock conteudo %}
-
 </main>
-
 </body>
 <footer>
     <hr />

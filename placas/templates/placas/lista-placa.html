@@ -13,27 +13,29 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Lista de Placas</h5>
-          
+
           {% if list_placa|length > 0 %}
-          <hr />  
-          <div class="form-inline" >
-              <a href="{% url 'placas:cadastrar-placa' %}" class="btn btn-success mb-2">
-                  Cadastrar Placa
-              </a>
-              <form class="form-inline">
-                  <br/>
-                  <div class="form-group mx-sm-3 mb-2 " >
-                    <input type="Pesquisa a placa." class="form-control" id="pesquisa" name="pesquisa" placeholder="Digite sua pesquisa">
-                  </div>
-        
-                  <button type="submit" class="btn btn-info mb-2">Pesquisar</button>
-              </form>
-          </div>  
+          <hr /></br>
+          <div class="container">
+            <a href="{% url 'placas:cadastrar-placa' %}" class="btn btn-success mb-2 btn-personal">
+              <img src="{% static 'placas/images/acrescer-png.png' %}" width=13> Cadastrar Placa
+            </a>
+            <form class="form-inline float-lg-right">
+              </br>
+              <div class="divBusca ">
+                <img class="divBuscaimg " src="{% static 'images/lupa2.png' %}" alt="Buscar" width="25" />
+                <input type="text" class="txtBusca embed-responsive" name="pesquisa" id="txtBusca"
+                  placeholder="Buscar..." />
+                <button type="submit" id="btnBusca" class="btnBusca embed-responsive">Buscar</button>
+              </div>
+            </form>
+          </div>
+        </div>
 
-
-            <div style="overflow: auto; height: 300px">
-            <table class="table table-striped table-bordered table-hover" role="grid" aria-describedby="dynamic-table_info">
-              <thead class="bg-dark text-white"  >
+        <div style="overflow: auto; height: 300px">
+          <table class="table table-striped table-bordered table-hover" role="grid"
+            aria-describedby="dynamic-table_info">
+            <thead class="bg-dark text-white">
               <tr class="text-center">
                 <th>ID</th>
                 <th>Nº de Série</th>
@@ -43,46 +45,43 @@
                 <th>Observação</th>
                 <th>Ação</th>
               </tr>
-              </thead>
+            </thead>
 
-              <tbody >
+            <tbody>
               {% for placa in list_placa %}
-                <tr class="text-center">
-                    <td>{{ placa.id }}</td>
-                    <td>{{ placa.Numero_serie }} </td> 
-                    <td>{{ placa.Modelo }} </td> 
-                    <td>{{ placa.Revisao_lm }} </td> 
-                    <td>{{ placa.Lote_numero }} </td>
-                    <td>{{ placa.Observacao }}</td>
-                  <td>
-                    
-                    <a alt="Editar" href="{% url 'placas:atualiza-placa' placa.id %}" class="fas fa-edit" ></a>                    
-                      
-                    <a alt="Excluir" class="fas fa-trash-alt" href="{% url 'placas:excluir-placa' placa.id %}"></a>                   
-                     
-                  </td>
-                </tr>
-              {% endfor %}
-              </tbody>
-              
-            </table>
-          </div>
-        {% else %}
-          <div class="text-center mt-5 mb-5 jumbotron">
-            <h5>Nenhuma <code>placa</code> cadastrada ainda </br>ou a pesquisa não retornou resultado.</h5>
-          </div>
-        {% endif %}
-          <hr />
+              <tr class="text-center">
+                <td>{{ placa.id }}</td>
+                <td>{{ placa.Numero_serie }} </td>
+                <td>{{ placa.Modelo }} </td>
+                <td>{{ placa.Revisao_lm }} </td>
+                <td>{{ placa.Lote_numero }} </td>
+                <td>{{ placa.Observacao }}</td>
+                <td>
 
-          </div>
+                  <a alt="Editar" href="{% url 'placas:atualiza-placa' placa.id %}" class="fas fa-edit"></a>
+
+                  <a alt="Excluir" class="fas fa-trash-alt" href="{% url 'placas:excluir-placa' placa.id %}"></a>
+
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+
+          </table>
         </div>
+        {% else %}
+        <div class="text-center mt-5 mb-5 jumbotron">
+          <h5>Nenhuma <code>placa</code> cadastrada ainda </br>ou a pesquisa não retornou resultado.</h5>
+        </div>
+        {% endif %}
+        <hr />
+
       </div>
     </div>
   </div>
 </div>
+</div>
+</div>
 
 
 {% endblock conteudo %}
-
-
-

@@ -15,71 +15,71 @@
           <h5 class="card-title">Lista de Modelos de Placa</h5>
 
           {% if list_modelo|length > 0 %}
-          <hr />
-          <div class="form-inline">
-            <a href="{% url 'placas:cadastrar-modelo' %}" class="btn btn-success mb-2">
-              Cadastrar Modelo
+          <hr /></br>
+          <div class="container">
+            <a href="{% url 'placas:cadastrar-modelo' %}" class="btn btn-success mb-2 btn-personal">
+              <img src="{% static 'placas/images/acrescer-png.png' %}" width=13> Cadastrar Modelo
             </a>
-            <form class="form-inline">
-              <br />
-              <div class="form-group mx-sm-3 mb-2">
-                <input type="Pesquisa modelo." class="form-control" id="pesquisa" name="pesquisa"
-                  placeholder="Digite sua pesquisa">
+            <form class="form-inline float-lg-right">
+              </br>
+              <div class="divBusca ">
+                <img class="divBuscaimg " src="{% static 'images/lupa2.png' %}" alt="Buscar" width="25" />
+                <input type="text" class="txtBusca embed-responsive" name="pesquisa" id="txtBusca"
+                  placeholder="Buscar..." />
+                <button type="submit" id="btnBusca" class="btnBusca embed-responsive">Buscar</button>
               </div>
-
-              <button type="submit" class="btn btn-info mb-2">Pesquisar</button>
             </form>
           </div>
-
-
-          <div style="overflow: auto; height: 300px">
-            <table class="table table-striped table-bordered table-hover" role="grid"
-              aria-describedby="dynamic-table_info">
-              <thead class="bg-dark text-white">
-                <tr class="text-center">
-                  <th>Modelo</th>
-                  <th>Descrição</th>
-                  <th>Ativo</th>
-                  <th>Ação</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {% for modelo in list_modelo %}
-                <tr class="text-center">
-                  <td> {{ modelo.Modelo }}</td>
-                  <td>{{ modelo.Descricao }} </td>
-                  <td>
-                    {% if modelo.Ativo == True %}
-                    <i class="far fa-check-circle"></i>
-                    {% else %}
-                    <i class="fas fa-ban"></i>
-                    {% endif %}
-                  </td>
-                  <td>
-
-                    <a alt="Editar" href="{% url 'placas:atualiza-modelo' modelo.id %}" class="fas fa-edit"></a>
-
-                    <a alt="Excluir" class="fas fa-trash-alt" href="{% url 'placas:excluir-modelo' modelo.id %}"></a>
-
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-
-            </table>
-          </div>
-          {% else %}
-          <div class="text-center mt-5 mb-5 jumbotron">
-            <h5>Nenhum <code>modelo</code> cadastrado ainda </br>ou a pesquisa não retornou resultado.</h5>
-          </div>
-          {% endif %}
-          <hr />
-
         </div>
+
+        <div style="overflow: auto; height: 300px">
+          <table class="table table-striped table-bordered table-hover" role="grid"
+            aria-describedby="dynamic-table_info">
+            <thead class="bg-dark text-white">
+              <tr class="text-center">
+                <th>Modelo</th>
+                <th>Descrição</th>
+                <th>Ativo</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for modelo in list_modelo %}
+              <tr class="text-center">
+                <td> {{ modelo.Modelo }}</td>
+                <td>{{ modelo.Descricao }} </td>
+                <td>
+                  {% if modelo.Ativo == True %}
+                  <i class="far fa-check-circle"></i>
+                  {% else %}
+                  <i class="fas fa-ban"></i>
+                  {% endif %}
+                </td>
+                <td>
+
+                  <a alt="Editar" href="{% url 'placas:atualiza-modelo' modelo.id %}" class="fas fa-edit"></a>
+
+                  <a alt="Excluir" class="fas fa-trash-alt" href="{% url 'placas:excluir-modelo' modelo.id %}"></a>
+
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+
+          </table>
+        </div>
+        {% else %}
+        <div class="text-center mt-5 mb-5 jumbotron">
+          <h5>Nenhum <code>modelo</code> cadastrado ainda </br>ou a pesquisa não retornou resultado.</h5>
+        </div>
+        {% endif %}
+        <hr />
+
       </div>
     </div>
   </div>
+</div>
 </div>
 </div>
 

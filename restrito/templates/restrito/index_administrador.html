@@ -6,14 +6,15 @@
 
 {% block conteudo %}
 
-<h2> Olá, {{ admin.nome }} </h2>
-<div class="container-fluid">
-    <p class="col-md-10 col-md-offset-2"> Suas funções </p>
-    <p class="col-md-10">- Requisitar Placas</p>
-    <p class="col-md-10">- Acompanhar Requisições</p>
-    <p class="col-md-10">- Visualizar Indicadores</p>
-    <p class="col-md-10">- Criar Usuários</p>
-    <p class="col-md-10">- Alterar Usuários</p>
+
+<div class="descricao-restrito">
+    <h2> Olá, {{ admin.nome }} </h2>
+    <p> Suas funções </p>
+    <p>- Requisitar Placas</p>
+    <p>- Acompanhar Requisições</p>
+    <p>- Visualizar Indicadores</p>
+    <p>- Criar Usuários</p>
+    <p>- Alterar Usuários</p>
 </div>
 
 {% endblock conteudo %}

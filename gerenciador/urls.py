@@ -21,6 +21,7 @@ from requisicao import urls
 from restrito import urls
 from indicadores import urls
 from core import urls
+from django.conf.urls.static import static, settings
 
 urlpatterns = [
     path('', include('core.urls')),
@@ -32,4 +33,4 @@ urlpatterns = [
     path('admin/', admin.site.urls)
    
 
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

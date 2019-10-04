@@ -1,0 +1,91 @@
+a {
+    color: inherit;
+    /* cor incolor para as tag do tipo a */
+}
+
+footer {
+    color: white
+}
+
+/* botões */
+
+.btn-personal {
+    text-align: center;
+    float: left;
+    top: 50%;
+    position: relative;
+    border-radius: 10px;
+    border-color: rgb(14, 60, 83);
+    color: rgb(14, 60, 83);
+    background-color: #E0EEEE;
+    font-weight: bold;
+    /* flex para alinhar conteúdo*/
+    justify-content: center;
+    align-items: center;
+    font-size: 13px
+}
+
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    position: relative;
+    background-attachment: fixed;
+    overflow: auto;
+}
+
+/* imagem profile tela restrito */
+.img-restrito {
+    position: relative;
+    top: -100px;
+    width: 40%;
+    bottom: 0%;
+    float: right;
+    left: 500px;
+}
+
+/* css titulos h2 */
+
+h2, .descricao-restrito {
+    color: white
+}
+
+/* tamanho da fonte do site */
+html {
+    font-size: 14px;
+}
+
+/* css campo de busca */
+
+.divBusca {
+    background-color: #E0EEEE;
+    border: solid 2px rgb(14, 60, 83);
+    border-radius: 10px;
+    width: 300px;
+    height: 35px;
+}
+
+.txtBusca {
+    float: left;
+    background-color: transparent;
+    padding-left: 5px;
+    font-size: 14px;
+    border: none;
+    height: 32px;
+    width: 191px;
+}
+
+.btnBusca {
+    border: none;
+    float: left;
+    height: 31px;
+    border-radius: 0 7px 7px 0;
+    width: 80px;
+    font-weight: bold;
+    background: rgb(14, 60, 83);
+    color: white;
+}
+
+.divBuscaimg {
+    float: left;
+}
