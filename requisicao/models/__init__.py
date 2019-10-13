@@ -1,1 +1,1 @@
-from .requisicao import *
+from .cadastro_requisicao import Cadastro_requisicao
